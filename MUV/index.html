@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MuvView - Stream Your Favorites</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="light-theme">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">MuvView</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#movies">Movies</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tv-shows">TV Shows</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#new-releases">New Releases</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#my-list">My List</a></li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <div class="search-container me-3">
+                        <input type="text" class="search-input" placeholder="Search...">
+                        <button class="search-btn"><i class="fas fa-search"></i></button>
+                    </div>
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox" />
+                            <div class="slider round">
+                                <i class="fas fa-sun"></i>
+                                <i class="fas fa-moon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Dune: Part Two</h1>
+            <div class="hero-info">
+                <span class="badge">New</span>
+                <span>2024</span>
+                <span>PG-13</span>
+                <span>2h 46m</span>
+            </div>
+            <p class="hero-description">Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-play"><i class="fas fa-play me-2"></i>Play</button>
+                <button class="btn btn-more-info"><i class="fas fa-info-circle me-2"></i>More Info</button>
+            </div>
+        </div>
+        <div class="hero-overlay"></div>
+    </section>
+
+    <!-- Trending Now Section -->
+    <section id="movies" class="movie-section">
+        <div class="container-fluid">
+            <h2 class="section-title">Trending Now</h2>
+            <div class="carousel-container">
+                <button class="carousel-control prev" id="trending-prev"><i class="fas fa-chevron-left"></i></button>
+                <div class="movie-carousel" id="trending-carousel">
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="Movie 1">
+                        <div class="movie-info">
+                            <h3>The Batman</h3>
+                            <div class="movie-meta">
+                                <span>97% Match</span>
+                                <span>2022</span>
+                                <span>PG-13</span>
+                            </div>
+                            <p>When the Riddler, a sadistic serial killer, begins murdering key political figures in Gotham, Batman is forced to investigate.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="Movie 2">
+                        <div class="movie-info">
+                            <h3>Oppenheimer</h3>
+                            <div class="movie-meta">
+                                <span>95% Match</span>
+                                <span>2023</span>
+                                <span>R</span>
+                            </div>
+                            <p>The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="Movie 3">
+                        <div class="movie-info">
+                            <h3>Barbie</h3>
+                            <div class="movie-meta">
+                                <span>92% Match</span>
+                                <span>2023</span>
+                                <span>PG-13</span>
+                            </div>
+                            <p>Barbie and Ken are having the time of their lives in the colorful and seemingly perfect world of Barbie Land.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="Movie 4">
+                        <div class="movie-info">
+                            <h3>Poor Things</h3>
+                            <div class="movie-meta">
+                                <span>94% Match</span>
+                                <span>2023</span>
+                                <span>R</span>
+                            </div>
+                            <p>The incredible tale about the fantastical evolution of Bella Baxter, a young woman brought back to life by an unorthodox scientist.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="Movie 5">
+                        <div class="movie-info">
+                            <h3>Killers of the Flower Moon</h3>
+                            <div class="movie-meta">
+                                <span>91% Match</span>
+                                <span>2023</span>
+                                <span>R</span>
+                            </div>
+                            <p>Members of the Osage tribe in the United States are murdered under mysterious circumstances in the 1920s.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="Movie 6">
+                        <div class="movie-info">
+                            <h3>The Holdovers</h3>
+                            <div class="movie-meta">
+                                <span>96% Match</span>
+                                <span>2023</span>
+                                <span>R</span>
+                            </div>
+                            <p>A cranky history teacher at a remote prep school is forced to remain on campus over the holidays with a troubled student.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control next" id="trending-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- TV Shows Section -->
+    <section id="tv-shows" class="movie-section">
+        <div class="container-fluid">
+            <h2 class="section-title">Popular TV Shows</h2>
+            <div class="carousel-container">
+                <button class="carousel-control prev" id="tv-prev"><i class="fas fa-chevron-left"></i></button>
+                <div class="movie-carousel" id="tv-carousel">
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="TV Show 1">
+                        <div class="movie-info">
+                            <h3>Stranger Things</h3>
+                            <div class="movie-meta">
+                                <span>98% Match</span>
+                                <span>2016-2024</span>
+                                <span>TV-14</span>
+                            </div>
+                            <p>When a young boy disappears, his mother, a police chief and his friends must confront terrifying supernatural forces.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="TV Show 2">
+                        <div class="movie-info">
+                            <h3>The Last of Us</h3>
+                            <div class="movie-meta">
+                                <span>96% Match</span>
+                                <span>2023</span>
+                                <span>TV-MA</span>
+                            </div>
+                            <p>After a global pandemic destroys civilization, a hardened survivor takes charge of a 14-year-old girl who may be humanity's last hope.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="TV Show 3">
+                        <div class="movie-info">
+                            <h3>Wednesday</h3>
+                            <div class="movie-meta">
+                                <span>93% Match</span>
+                                <span>2022</span>
+                                <span>TV-14</span>
+                            </div>
+                            <p>Wednesday Addams is sent to Nevermore Academy, where she attempts to master her emerging psychic ability.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="TV Show 4">
+                        <div class="movie-info">
+                            <h3>The Bear</h3>
+                            <div class="movie-meta">
+                                <span>99% Match</span>
+                                <span>2022-2023</span>
+                                <span>TV-MA</span>
+                            </div>
+                            <p>A young chef from the fine dining world returns to Chicago to run his family's sandwich shop after the death of his brother.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="TV Show 5">
+                        <div class="movie-info">
+                            <h3>Succession</h3>
+                            <div class="movie-meta">
+                                <span>97% Match</span>
+                                <span>2018-2023</span>
+                                <span>TV-MA</span>
+                            </div>
+                            <p>The Roy family is known for controlling the biggest media and entertainment company in the world.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="TV Show 6">
+                        <div class="movie-info">
+                            <h3>Shogun</h3>
+                            <div class="movie-meta">
+                                <span>95% Match</span>
+                                <span>2024</span>
+                                <span>TV-MA</span>
+                            </div>
+                            <p>Set in Japan in the year 1600, at the dawn of a century-defining civil war, Lord Yoshii Toranaga is fighting for his life.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control next" id="tv-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Releases Section -->
+    <section id="new-releases" class="movie-section">
+        <div class="container-fluid">
+            <h2 class="section-title">New Releases</h2>
+            <div class="carousel-container">
+                <button class="carousel-control prev" id="new-prev"><i class="fas fa-chevron-left"></i></button>
+                <div class="movie-carousel" id="new-carousel">
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="New Release 1">
+                        <div class="movie-info">
+                            <h3>Challengers</h3>
+                            <div class="movie-meta">
+                                <span>New</span>
+                                <span>2024</span>
+                                <span>R</span>
+                            </div>
+                            <p>Follows three players who knew each other when they were teenagers as they compete in a tennis tournament.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="New Release 2">
+                        <div class="movie-info">
+                            <h3>Civil War</h3>
+                            <div class="movie-meta">
+                                <span>New</span>
+                                <span>2024</span>
+                                <span>R</span>
+                            </div>
+                            <p>In a near-future America ravaged by political division, a team of journalists travel across the country during a rapidly escalating civil war.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="New Release 3">
+                        <div class="movie-info">
+                            <h3>Godzilla x Kong</h3>
+                            <div class="movie-meta">
+                                <span>New</span>
+                                <span>2024</span>
+                                <span>PG-13</span>
+                            </div>
+                            <p>Two ancient titans, Godzilla and Kong, clash in an epic battle as humans unravel their intertwined origins.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="New Release 4">
+                        <div class="movie-info">
+                            <h3>Furiosa</h3>
+                            <div class="movie-meta">
+                                <span>Coming Soon</span>
+                                <span>2024</span>
+                                <span>R</span>
+                            </div>
+                            <p>The origin story of renegade warrior Furiosa before her encounter with Max Rockatansky.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="New Release 5">
+                        <div class="movie-info">
+                            <h3>Kingdom of the Planet of the Apes</h3>
+                            <div class="movie-meta">
+                                <span>Coming Soon</span>
+                                <span>2024</span>
+                                <span>PG-13</span>
+                            </div>
+                            <p>Many years after the reign of Caesar, a young ape goes on a journey that will lead him to question everything he's been taught.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="New Release 6">
+                        <div class="movie-info">
+                            <h3>Inside Out 2</h3>
+                            <div class="movie-meta">
+                                <span>Coming Soon</span>
+                                <span>2024</span>
+                                <span>PG</span>
+                            </div>
+                            <p>Follow Riley in her teenage years as new emotions join her original five feelings inside Headquarters.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control next" id="new-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- My List Section -->
+    <section id="my-list" class="movie-section">
+        <div class="container-fluid">
+            <h2 class="section-title">My List</h2>
+            <div class="carousel-container">
+                <button class="carousel-control prev" id="mylist-prev"><i class="fas fa-chevron-left"></i></button>
+                <div class="movie-carousel" id="mylist-carousel">
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="My List 1">
+                        <div class="movie-info">
+                            <h3>Inception</h3>
+                            <div class="movie-meta">
+                                <span>94% Match</span>
+                                <span>2010</span>
+                                <span>PG-13</span>
+                            </div>
+                            <p>A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="My List 2">
+                        <div class="movie-info">
+                            <h3>The Shawshank Redemption</h3>
+                            <div class="movie-meta">
+                                <span>98% Match</span>
+                                <span>1994</span>
+                                <span>R</span>
+                            </div>
+                            <p>Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="My List 3">
+                        <div class="movie-info">
+                            <h3>Parasite</h3>
+                            <div class="movie-meta">
+                                <span>96% Match</span>
+                                <span>2019</span>
+                                <span>R</span>
+                            </div>
+                            <p>Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="My List 4">
+                        <div class="movie-info">
+                            <h3>Everything Everywhere All at Once</h3>
+                            <div class="movie-meta">
+                                <span>95% Match</span>
+                                <span>2022</span>
+                                <span>R</span>
+                            </div>
+                            <p>An aging Chinese immigrant is swept up in an insane adventure, where she alone can save the world by exploring other universes.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="My List 5">
+                        <div class="movie-info">
+                            <h3>The Dark Knight</h3>
+                            <div class="movie-meta">
+                                <span>97% Match</span>
+                                <span>2008</span>
+                                <span>PG-13</span>
+                            </div>
+                            <p>When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological tests.</p>
+                        </div>
+                    </div>
+                    <div class="movie-card">
+                        <img src="/placeholder.svg?height=400&width=270" alt="My List 6">
+                        <div class="movie-info">
+                            <h3>Interstellar</h3>
+                            <div class="movie-meta">
+                                <span>93% Match</span>
+                                <span>2014</span>
+                                <span>PG-13</span>
+                            </div>
+                            <p>A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control next" id="mylist-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5>MuvView</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Jobs</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Cookie Preferences</a></li>
+                        <li><a href="#">Legal Notices</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Account</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Gift Cards</a></li>
+                        <li><a href="#">Redeem Gift Cards</a></li>
+                        <li><a href="#">Privacy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Follow Us</h5>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <p class="copyright">© 2024 MuvView. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
