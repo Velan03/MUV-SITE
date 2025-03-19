@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MuvView - Stream Your Favorites</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <!-- Custom CSS (assumed to exist) -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="light-theme">
+    <!-- Loading Overlay -->
+    <div id="loading-overlay">
+        <div class="spinner-container">
+            <div class="spinner">
+                <div class="logo-text">Muv<span class="text-danger">View</span></div>
+                <div class="spinner-border text-danger mt-3" role="status"></div>
+            </div>
+            <p class="mt-3 text-white loading-text">Loading MuvView...</p>
+        </div>
+    </div>
+
+    <!-- Language Selector (Fixed) -->
+    <div class="language-selector">
+        <div class="selected-language">
+            <i class="fas fa-globe"></i>
+            <span>EN</span>
+        </div>
+        <div class="language-dropdown">
+            <div class="language-option" data-lang="en">English</div>
+            <div class="language-option" data-lang="es">Español</div>
+            <div class="language-option" data-lang="hi">हिन्दी</div>
+            <div class="language-option" data-lang="ta">தமிழ்</div>
+            <div class="language-option" data-lang="te">తెలుగు</div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand" href="#">
+                <span class="logo-text">Muv<span class="text-danger">View</span></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#home" data-translate="nav.home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#movies" data-translate="nav.movies">Movies</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tv-shows" data-translate="nav.tvShows">TV Shows</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#new-releases" data-translate="nav.newReleases">New Releases</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#my-list" data-translate="nav.myList">My List</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-translate="nav.genres">Genres</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" data-translate="genres.action">Action</a></li>
+                            <li><a class="dropdown-item" href="#" data-translate="genres.comedy">Comedy</a></li>
+                            <li><a class="dropdown-item" href="#" data-translate="genres.drama">Drama</a></li>
+                            <li><a class="dropdown-item" href="#" data-translate="genres.horror">Horror</a></li>
+                            <li><a class="dropdown-item" href="#" data-translate="genres.scifi">Sci-Fi</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" data-translate="genres.all">All Genres</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="search-container">
+                        <input type="text" class="search-input" placeholder="Search..." data-translate-placeholder="search.placeholder">
+                        <button class="search-btn"><i class="fas fa-search"></i></button>
+                        <div class="search-results"></div>
+                    </div>
+                    <div class="dropdown user-dropdown">
+                        <a class="dropdown-toggle user-icon" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i><span data-translate="user.profile">Profile</span></a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i><span data-translate="user.settings">Settings</span></a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i><span data-translate="user.logout">Logout</span></a></li>
+                        </ul>
+                    </div>
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox" />
+                            <div class="slider round">
+                                <i class="fas fa-sun"></i>
+                                <i class="fas fa-moon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content" data-aos="fade-right" data-aos-duration="1000">
+            <h1 class="hero-title"></h1>
+            <div class="hero-info">
+                <span class="badge"><span data-translate="hero.new">New</span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <p class="hero-description"></p>
+            <div class="hero-buttons">
+                <button class="btn btn-play"><i class="fas fa-play me-2"></i><span data-translate="hero.play">Play</span></button>
+                <button class="btn btn-more-info"><i class="fas fa-info-circle me-2"></i><span data-translate="hero.moreInfo">More Info</span></button>
+                <button class="btn btn-add-list"><i class="fas fa-plus me-2"></i><span data-translate="hero.addToList">Add to List</span></button>
+            </div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-indicators">
+            <span class="hero-indicator active" data-index="0"></span>
+            <span class="hero-indicator" data-index="1"></span>
+        </div>
+    </section>
+
+    <!-- Category Filter -->
+    <div class="category-filter">
+        <div class="container-fluid px-4">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all" data-translate="filters.all">All</button>
+                <button class="filter-btn" data-filter="action" data-translate="filters.action">Action</button>
+                <button class="filter-btn" data-filter="drama" data-translate="filters.drama">Drama</button>
+                <button class="filter-btn" data-filter="comedy" data-translate="filters.comedy">Comedy</button>
+                <button class="filter-btn" data-filter="movie" data-translate="filters.movies">Movies</button>
+                <button class="filter-btn" data-filter="series" data-translate="filters.series">Series</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trending Now Section -->
+    <section id="movies" class="movie-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="container-fluid px-4">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="sections.trending">Trending Now</h2>
+                <div class="section-controls">
+                    <button class="btn btn-outline-danger btn-sm">See All</button>
+                </div>
+            </div>
+            <div class="swiper-container" id="trending-swiper">
+                <div class="swiper-wrapper"></div>
+                <div class="swiper-button-next" id="trending-next"></div>
+                <div class="swiper-button-prev" id="trending-prev"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TV Shows Section -->
+    <section id="tv-shows" class="movie-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="container-fluid px-4">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="sections.tvShows">Popular TV Shows</h2>
+                <div class="section-controls">
+                    <button class="btn btn-outline-danger btn-sm">See All</button>
+                </div>
+            </div>
+            <div class="swiper-container" id="tv-swiper">
+                <div class="swiper-wrapper"></div>
+                <div class="swiper-button-next" id="tv-next"></div>
+                <div class="swiper-button-prev" id="tv-prev"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Releases Section -->
+    <section id="new-releases" class="movie-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="container-fluid px-4">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="sections.newReleases">New Releases</h2>
+                <div class="section-controls">
+                    <button class="btn btn-outline-danger btn-sm">See All</button>
+                </div>
+            </div>
+            <div class="swiper-container" id="new-swiper">
+                <div class="swiper-wrapper"></div>
+                <div class="swiper-button-next" id="new-next"></div>
+                <div class="swiper-button-prev" id="new-prev"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- My List Section -->
+    <section id="my-list" class="movie-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="container-fluid px-4">
+            <div class="section-header">
+                <h2 class="section-title" data-translate="sections.myList">My List</h2>
+                <div class="section-controls">
+                    <button class="btn btn-outline-danger btn-sm" data-translate="buttons.manageList">Manage List</button>
+                </div>
+            </div>
+            <div class="swiper-container" id="mylist-swiper">
+                <div class="swiper-wrapper"></div>
+                <div class="swiper-button-next" id="mylist-next"></div>
+                <div class="swiper-button-prev" id="mylist-prev"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" data-aos="fade-up" data-aos-duration="800">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Stay Updated</h2>
+                <p>Subscribe to our newsletter for the latest releases, exclusive content, and special offers.</p>
+                <form class="newsletter-form">
+                    <div class="input-group">
+                        <input type="email" class="form-control" placeholder="Your email address" required>
+                        <button class="btn btn-danger" type="submit">Subscribe</button>
+                    </div>
+                    <div class="form-check mt-3">
+                        <input class="form-check-input" type="checkbox" id="newsletter-consent">
+                        <label class="form-check-label" for="newsletter-consent">
+                            I agree to receive promotional emails and updates from MuvView
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <h5>MuvView</h5>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-angle-right me-2"></i><span data-translate="footer.about">About Us</span></a></li>
+                        <li><a href="#"><i class="fas fa-angle-right me-2"></i><span data-translate="footer.jobs">Jobs</span></a></li>
+                        <li><a href="#"><i class="fas fa-angle-right me-2"></i><span data-translate="footer.press">Press</span></a></li>
+                        <li><a href="#"><i class="fas fa-angle-right me-2"></i><span data-translate="footer.blog">Blog</span></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <h5 data-translate="footer.supportTitle">Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-angle-right me-2"></i><span data-translate="footer.helpCenter">Help Center</span></a></li>
+                        <li><a href="#"><i class="fas fa-angle-right me-2"></i><span data-translate="footer.contact">Contact Us</span></a></li>
+                        <li><a href="#"><i class="fas fa-angle-right me-2"></i><span data-translate="footer.cookies">Cookie Preferences</span></a></li>
+                        <li><a href="#"><i class="fas fa-angle-right me-2"></i><span data-translate="footer.legal">Legal Notices</span></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <h5 data-translate="footer.accountTitle">Account</h5>
+                    <ul class="footer-links">
+                        <li><a href="#"><i class="fas fa-angle-right me-2"></i><span data-translate="footer.myAccount">My Account</span></a></li>
+                        <li><a href="#"><i class="fas fa-angle-right me-2"></i><span data-translate="footer.giftCards">Gift Cards</span></a></li>
+                        <li><a href="#"><i class="fas fa-angle-right me-2"></i><span data-translate="footer.redeem">Redeem Gift Cards</span></a></li>
+                        <li><a href="#"><i class="fas fa-angle-right me-2"></i><span data-translate="footer.privacy">Privacy</span></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <h5 data-translate="footer.followTitle">Follow Us</h5>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <div class="app-download mt-3">
+                        <p>Download our app:</p>
+                        <div class="d-flex gap-2">
+                            <a href="#" class="btn btn-outline-light btn-sm"><i class="fab fa-apple me-1"></i> App Store</a>
+                            <a href="#" class="btn btn-outline-light btn-sm"><i class="fab fa-google-play me-1"></i> Google Play</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <p class="copyright" data-translate="footer.copyright">© 2024 MuvView. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Movie Detail Modal -->
+    <div class="modal fade" id="movieModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Movie Title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="https://via.placeholder.com/300x450" alt="Movie Poster" class="img-fluid rounded modal-poster">
+                            <div class="mt-3 d-flex justify-content-center">
+                                <button class="btn btn-trailer" id="play-trailer"><i class="fas fa-film me-2"></i><span data-translate="modal.trailer">Trailer</span></button>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="movie-details">
+                                <div class="d-flex align-items-center mb-3">
+                                    <span class="match-badge me-3">95% Match</span>
+                                    <span class="me-3 year-info">2023</span>
+                                    <span class="me-3 rating-info">PG-13</span>
+                                    <span class="duration-info">2h 30m</span>
+                                </div>
+                                <p class="movie-description">Movie description goes here...</p>
+                                <div class="movie-meta-info">
+                                    <p><strong data-translate="modal.genre">Genre:</strong> <span id="modal-genre">Action, Adventure</span></p>
+                                    <p><strong data-translate="modal.cast">Cast:</strong> <span id="modal-cast">Actor 1, Actor 2, Actor 3</span></p>
+                                    <p><strong data-translate="modal.director">Director:</strong> <span id="modal-director">Director Name</span></p>
+                                </div>
+                                <div class="modal-buttons mt-4">
+                                    <button class="btn btn-play me-2"><i class="fas fa-play me-2"></i><span data-translate="modal.play">Play</span></button>
+                                    <button class="btn btn-add-list me-2" id="modal-list-btn"><i class="fas fa-plus me-2"></i><span data-translate="modal.addToList">Add to My List</span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <h5>Similar Titles</h5>
+                            <div class="similar-movies"></div>
+                        </div>
+                    </div>
+                    <div class="trailer-container mt-4 d-none">
+                        <div class="ratio ratio-16x9">
+                            <iframe id="trailer-iframe" src="" title="Movie Trailer" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">MuvView</strong>
+                <small>Just now</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body"></div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+        // Mock data
+        const translations = {
+            en: {
+                nav: { home: "Home", movies: "Movies", tvShows: "TV Shows", newReleases: "New Releases", myList: "My List", genres: "Genres" },
+                genres: { action: "Action", comedy: "Comedy", drama: "Drama", horror: "Horror", scifi: "Sci-Fi", all: "All Genres" },
+                user: { profile: "Profile", settings: "Settings", logout: "Logout" },
+                hero: { new: "New", play: "Play", moreInfo: "More Info", addToList: "Add to List" },
+                filters: { all: "All", action: "Action", drama: "Drama", comedy: "Comedy", movies: "Movies", series: "Series" },
+                sections: { trending: "Trending Now", tvShows: "Popular TV Shows", newReleases: "New Releases", myList: "My List" },
+                buttons: { manageList: "Manage List" },
+                modal: { removeFromList: "Remove from My List", addToList: "Add to My List", play: "Play", trailer: "Trailer", genre: "Genre:", cast: "Cast:", director: "Director:" },
+                footer: { about: "About Us", jobs: "Jobs", press: "Press", blog: "Blog", supportTitle: "Support", helpCenter: "Help Center", contact: "Contact Us", cookies: "Cookie Preferences", legal: "Legal Notices", accountTitle: "Account", myAccount: "My Account", giftCards: "Gift Cards", redeem: "Redeem Gift Cards", privacy: "Privacy", followTitle: "Follow Us", copyright: "© 2024 MuvView. All rights reserved." },
+                search: { placeholder: "Search..." }
+            },
+            es: {
+                nav: { home: "Inicio", movies: "Películas", tvShows: "Series", newReleases: "Nuevos Lanzamientos", myList: "Mi Lista", genres: "Géneros" },
+                genres: { action: "Acción", comedy: "Comedia", drama: "Drama", horror: "Terror", scifi: "Ciencia Ficción", all: "Todos los Géneros" },
+                user: { profile: "Perfil", settings: "Configuración", logout: "Cerrar Sesión" },
+                hero: { new: "Nuevo", play: "Reproducir", moreInfo: "Más Info", addToList: "Añadir a Lista" },
+                filters: { all: "Todo", action: "Acción", drama: "Drama", comedy: "Comedia", movies: "Películas", series: "Series" },
+                sections: { trending: "Tendencias Ahora", tvShows: "Series Populares", newReleases: "Nuevos Lanzamientos", myList: "Mi Lista" },
+                buttons: { manageList: "Gestionar Lista" },
+                modal: { removeFromList: "Eliminar de Mi Lista", addToList: "Añadir a Mi Lista", play: "Reproducir", trailer: "Tráiler", genre: "Género:", cast: "Reparto:", director: "Director:" },
+                footer: { about: "Sobre Nosotros", jobs: "Trabajos", press: "Prensa", blog: "Blog", supportTitle: "Soporte", helpCenter: "Centro de Ayuda", contact: "Contáctanos", cookies: "Preferencias de Cookies", legal: "Avisos Legales", accountTitle: "Cuenta", myAccount: "Mi Cuenta", giftCards: "Tarjetas de Regalo", redeem: "Canjear Tarjetas de Regalo", privacy: "Privacidad", followTitle: "Síguenos", copyright: "© 2024 MuvView. Todos los derechos reservados." },
+                search: { placeholder: "Buscar..." }
+            }
+        };
+
+        const heroMovies = [
+            { id: 1, title: "Hero Movie 1", description: "Description for Hero Movie 1", year: 2023, rating: "8.5", duration: "2h 30m", image: "https://via.placeholder.com/1920x1080", trailer: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+            { id: 2, title: "Hero Movie 2", description: "Description for Hero Movie 2", year: 2024, rating: "9.0", duration: "2h 15m", image: "https://via.placeholder.com/1920x1080", trailer: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
+        ];
+
+        const moviesData = [
+            { id: 101, title: "Trending Movie 1", description: "Description for Trending Movie 1", year: 2022, rating: "7.8", duration: "1h 45m", image: "https://via.placeholder.com/300x450", category: "trending", genre: ["Action", "Adventure"], match: 92, trailer: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+            { id: 102, title: "TV Show 1", description: "Description for TV Show 1", year: 2023, rating: "8.2", duration: "45m", image: "https://via.placeholder.com/300x450", category: "tv", genre: ["Drama", "Mystery"], trailer: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+            { id: 103, title: "New Movie 1", description: "Description for New Movie 1", year: 2024, rating: "8.9", duration: "2h 0m", image: "https://via.placeholder.com/300x450", category: "new", genre: ["Sci-Fi", "Thriller"], trailer: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+            { id: 104, title: "My List Movie 1", description: "Description for My List Movie 1", year: 2021, rating: "7.5", duration: "1h 30m", image: "https://via.placeholder.com/300x450", category: "mylist", genre: ["Comedy", "Romance"], trailer: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
+        ];
+
+        // Wait for DOM to be fully loaded
+        document.addEventListener("DOMContentLoaded", () => {
+            // Initialize AOS
+            AOS.init({ once: true, duration: 800, offset: 100 });
+
+            // Hide loading overlay
+            window.addEventListener("load", () => {
+                setTimeout(() => {
+                    const overlay = document.getElementById("loading-overlay");
+                    if (overlay) overlay.classList.add("hidden");
+                }, 1500);
+            });
+
+            let currentLanguage = "en";
+
+            // Language Selector
+            const languageSelector = document.querySelector(".language-selector");
+            const dropdown = document.querySelector(".language-dropdown");
+            const languageOptions = document.querySelectorAll(".language-option");
+
+            languageSelector.addEventListener("click", (event) => {
+                event.stopPropagation();
+                dropdown.classList.toggle("show");
+            });
+
+            languageOptions.forEach((option) => {
+                option.addEventListener("click", function (event) {
+                    event.stopPropagation();
+                    const lang = this.getAttribute("data-lang");
+                    changeLanguage(lang);
+                    document.querySelector(".selected-language span").textContent = lang.toUpperCase();
+                    showToast(`Language changed to ${getLanguageName(lang)}`);
+                    dropdown.classList.remove("show");
+                });
+            });
+
+            document.addEventListener("click", () => {
+                dropdown.classList.remove("show");
+            });
+
+            function getLanguageName(code) {
+                const names = { en: "English", es: "Español", hi: "हिन्दी", ta: "தமிழ்", te: "తెలుగు" };
+                return names[code] || code.toUpperCase();
+            }
+
+            // Theme Switcher
+            const themeToggle = document.getElementById("checkbox");
+            const body = document.body;
+            const currentTheme = localStorage.getItem("theme") || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+
+            if (currentTheme === "dark") {
+                body.classList.add("dark-theme");
+                themeToggle.checked = true;
+            } else {
+                body.classList.remove("dark-theme");
+                themeToggle.checked = false;
+            }
+
+            themeToggle.addEventListener("change", function () {
+                if (this.checked) {
+                    body.classList.add("dark-theme");
+                    localStorage.setItem("theme", "dark");
+                    showToast("Dark mode enabled");
+                } else {
+                    body.classList.remove("dark-theme");
+                    localStorage.setItem("theme", "light");
+                    showToast("Light mode enabled");
+                }
+            });
+
+            // Translation Functionality
+            function changeLanguage(lang) {
+                if (!translations[lang]) {
+                    console.error(`Translation for ${lang} not available`);
+                    return;
+                }
+
+                currentLanguage = lang;
+                localStorage.setItem("language", lang);
+
+                document.querySelectorAll("[data-translate]").forEach((element) => {
+                    const key = element.getAttribute("data-translate");
+                    const keys = key.split(".");
+                    let translation = translations[lang];
+
+                    for (const k of keys) {
+                        if (translation && translation[k]) {
+                            translation = translation[k];
+                        } else {
+                            translation = null;
+                            break;
+                        }
+                    }
+
+                    if (translation) element.textContent = translation;
+                });
+
+                document.querySelectorAll("[data-translate-placeholder]").forEach((element) => {
+                    const key = element.getAttribute("data-translate-placeholder");
+                    const keys = key.split(".");
+                    let translation = translations[lang];
+
+                    for (const k of keys) {
+                        if (translation && translation[k]) {
+                            translation = translation[k];
+                        } else {
+                            translation = null;
+                            break;
+                        }
+                    }
+
+                    if (translation) element.placeholder = translation;
+                });
+            }
+
+            // Load saved language
+            const savedLanguage = localStorage.getItem("language") || "en";
+            changeLanguage(savedLanguage);
+            document.querySelector(".selected-language span").textContent = savedLanguage.toUpperCase();
+
+            // Hero Section Rotation
+            let currentHeroIndex = 0;
+            const heroSection = document.querySelector(".hero-section");
+            const heroTitle = document.querySelector(".hero-title");
+            const heroDescription = document.querySelector(".hero-description");
+            const heroIndicators = document.querySelectorAll(".hero-indicator");
+
+            function updateHero(index) {
+                const hero = heroMovies[index];
+                heroSection.style.opacity = "0";
+                setTimeout(() => {
+                    heroTitle.textContent = hero.title;
+                    heroDescription.textContent = hero.description;
+                    document.querySelector(".hero-info span:nth-child(2)").innerHTML = `<i class="far fa-calendar-alt me-1"></i>${hero.year}`;
+                    document.querySelector(".hero-info span:nth-child(3)").innerHTML = `<i class="fas fa-film me-1"></i>${hero.rating}`;
+                    document.querySelector(".hero-info span:nth-child(4)").innerHTML = `<i class="far fa-clock me-1"></i>${hero.duration}`;
+                    heroSection.style.backgroundImage = `url('${hero.image}')`;
+                    heroIndicators.forEach((indicator, i) => indicator.classList.toggle("active", i === index));
+                    heroSection.style.opacity = "1";
+                }, 500);
+            }
+
+            // Initialize hero section
+            updateHero(currentHeroIndex);
+            setInterval(() => {
+                currentHeroIndex = (currentHeroIndex + 1) % heroMovies.length;
+                updateHero(currentHeroIndex);
+            }, 8000);
+
+            heroIndicators.forEach((indicator, index) => {
+                indicator.addEventListener("click", () => {
+                    currentHeroIndex = index;
+                    updateHero(currentHeroIndex);
+                });
+            });
+
+            // Swiper Initialization
+            const swiperOptions = {
+                slidesPerView: "auto",
+                spaceBetween: 20,
+                navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+                breakpoints: {
+                    320: { slidesPerView: 2, spaceBetween: 10 },
+                    576: { slidesPerView: 3, spaceBetween: 15 },
+                    768: { slidesPerView: 4, spaceBetween: 15 },
+                    992: { slidesPerView: 5, spaceBetween: 20 },
+                    1200: { slidesPerView: 6, spaceBetween: 20 }
+                }
+            };
+
+            function createMovieCard(movie) {
+                const slide = document.createElement("div");
+                slide.className = "swiper-slide";
+                slide.setAttribute("data-category", movie.genre.join(" "));
+                slide.setAttribute("data-id", movie.id);
+
+                let badgeHTML = "";
+                if (movie.category === "new") badgeHTML = `<span class="new-badge">New</span>`;
+                else if (movie.match) badgeHTML = `<span class="match-badge">${movie.match}% Match</span>`;
+                else if (movie.category === "coming") badgeHTML = `<span class="coming-badge">Coming Soon</span>`;
+
+                slide.innerHTML = `
+                    <div class="movie-card">
+                        <div class="card-poster">
+                            <img src="${movie.image}" alt="${movie.title}">
+                            <div class="card-overlay">
+                                <div class="card-buttons">
+                                    <button class="card-btn play-btn" data-id="${movie.id}"><i class="fas fa-play"></i></button>
+                                    <button class="card-btn ${movie.category === "mylist" ? "remove-btn" : "add-btn"}" data-id="${movie.id}">
+                                        <i class="fas ${movie.category === "mylist" ? "fa-minus" : "fa-plus"}"></i>
+                                    </button>
+                                    <button class="card-btn info-btn" data-id="${movie.id}"><i class="fas fa-info-circle"></i></button>
+                                </div>
+                            </div>
+                            ${badgeHTML}
+                        </div>
+                        <div class="movie-info">
+                            <h3>${movie.title}</h3>
+                            <div class="movie-meta">
+                                <span>${movie.year}</span>
+                                <span>${movie.rating}</span>
+                            </div>
+                            <p>${movie.description}</p>
+                        </div>
+                    </div>
+                `;
+                return slide;
+            }
+
+            function populateSwipers() {
+                const trendingSwiper = document.querySelector("#trending-swiper .swiper-wrapper");
+                const tvSwiper = document.querySelector("#tv-swiper .swiper-wrapper");
+                const newSwiper = document.querySelector("#new-swiper .swiper-wrapper");
+                const mylistSwiper = document.querySelector("#mylist-swiper .swiper-wrapper");
+
+                trendingSwiper.innerHTML = "";
+                tvSwiper.innerHTML = "";
+                newSwiper.innerHTML = "";
+                mylistSwiper.innerHTML = "";
+
+                moviesData.filter(movie => movie.category === "trending").forEach(movie => trendingSwiper.appendChild(createMovieCard(movie)));
+                moviesData.filter(movie => movie.category === "tv").forEach(movie => tvSwiper.appendChild(createMovieCard(movie)));
+                moviesData.filter(movie => movie.category === "new").forEach(movie => newSwiper.appendChild(createMovieCard(movie)));
+                moviesData.filter(movie => movie.category === "mylist").forEach(movie => mylistSwiper.appendChild(createMovieCard(movie)));
+            }
+
+            function initializeSwipers() {
+                new Swiper("#trending-swiper", { ...swiperOptions, navigation: { nextEl: "#trending-next", prevEl: "#trending-prev" } });
+                new Swiper("#tv-swiper", { ...swiperOptions, navigation: { nextEl: "#tv-next", prevEl: "#tv-prev" } });
+                new Swiper("#new-swiper", { ...swiperOptions, navigation: { nextEl: "#new-next", prevEl: "#new-prev" } });
+                new Swiper("#mylist-swiper", { ...swiperOptions, navigation: { nextEl: "#mylist-next", prevEl: "#mylist-prev" } });
+            }
+
+            populateSwipers();
+            initializeSwipers();
+
+            // Category Filter
+            const filterButtons = document.querySelectorAll(".filter-btn");
+            filterButtons.forEach(button => {
+                button.addEventListener("click", function () {
+                    filterButtons.forEach(btn => btn.classList.remove("active"));
+                    this.classList.add("active");
+                    const filter = this.getAttribute("data-filter");
+                    document.querySelectorAll(".swiper-slide").forEach(card => {
+                        if (filter === "all") card.style.display = "block";
+                        else {
+                            const categories = card.getAttribute("data-category").split(" ");
+                            card.style.display = categories.includes(filter) ? "block" : "none";
+                        }
+                    });
+                });
+            });
+
+            // Movie Modal
+            const movieModalElement = document.getElementById("movieModal");
+            const movieModal = new bootstrap.Modal(movieModalElement);
+            const modalTitle = document.querySelector(".modal-title");
+            const modalPoster = document.querySelector(".modal-poster");
+            const modalDescription = document.querySelector(".movie-description");
+            const modalGenre = document.getElementById("modal-genre");
+            const modalYear = document.querySelector(".year-info");
+            const modalRating = document.querySelector(".rating-info");
+            const modalDuration = document.querySelector(".duration-info");
+            const modalMatch = document.querySelector(".match-badge");
+            const modalListBtn = document.getElementById("modal-list-btn");
+            const trailerBtn = document.getElementById("play-trailer");
+            const trailerContainer = document.querySelector(".trailer-container");
+            const trailerIframe = document.getElementById("trailer-iframe");
+
+            document.addEventListener("click", (e) => {
+                if (e.target.closest(".info-btn") || e.target.closest(".btn-more-info")) {
+                    const id = e.target.closest(".info-btn")?.getAttribute("data-id") || heroMovies[currentHeroIndex].id;
+                    const movie = moviesData.find(m => m.id == id) || heroMovies.find(m => m.id == id);
+
+                    if (movie) {
+                        modalTitle.textContent = movie.title;
+                        modalPoster.src = movie.image;
+                        modalPoster.alt = movie.title;
+                        modalDescription.textContent = movie.description;
+                        modalGenre.textContent = Array.isArray(movie.genre) ? movie.genre.join(", ") : movie.genre;
+                        modalYear.textContent = movie.year;
+                        modalRating.textContent = movie.rating;
+                        modalDuration.textContent = movie.duration;
+
+                        if (movie.match) {
+                            modalMatch.textContent = `${movie.match}% Match`;
+                            modalMatch.style.display = "inline-block";
+                        } else {
+                            modalMatch.style.display = "none";
+                        }
+
+                        modalListBtn.innerHTML = movie.category === "mylist" ?
+                            `<i class="fas fa-minus me-2"></i><span data-translate="modal.removeFromList">Remove from My List</span>` :
+                            `<i class="fas fa-plus me-2"></i><span data-translate="modal.addToList">Add to My List</span>`;
+
+                        if (movie.trailer) {
+                            trailerBtn.style.display = "block";
+                            trailerIframe.src = "";
+                        } else {
+                            trailerBtn.style.display = "none";
+                        }
+
+                        trailerContainer.classList.add("d-none");
+                        movieModal.show();
+                    }
+                }
+            });
+
+            trailerBtn.addEventListener("click", () => {
+                const movie = moviesData.find(m => m.title === modalTitle.textContent) || heroMovies.find(m => m.title === modalTitle.textContent);
+                if (movie && movie.trailer) {
+                    trailerIframe.src = movie.trailer;
+                    trailerContainer.classList.remove("d-none");
+                }
+            });
+
+            movieModalElement.addEventListener("hidden.bs.modal", () => {
+                trailerIframe.src = "";
+                trailerContainer.classList.add("d-none");
+            });
+
+            // Add/Remove from My List
+            document.addEventListener("click", (e) => {
+                if (e.target.closest(".add-btn") || e.target.closest(".remove-btn") || e.target.closest(".btn-add-list")) {
+                    const isRemove = e.target.closest(".remove-btn");
+                    const id = e.target.closest(".add-btn, .remove-btn")?.getAttribute("data-id") || heroMovies[currentHeroIndex].id;
+                    const movie = moviesData.find(m => m.id == id) || heroMovies.find(m => m.id == id);
+
+                    if (movie) {
+                        if (isRemove) {
+                            movie.category = movie.originalCategory || "trending";
+                            showToast("Removed from your list");
+                        } else {
+                            movie.originalCategory = movie.category;
+                            movie.category = "mylist";
+                            showToast("Added to your list");
+                        }
+                        populateSwipers();
+                        initializeSwipers();
+                    }
+                }
+            });
+
+            // Search Functionality
+            const searchInput = document.querySelector(".search-input");
+            const searchBtn = document.querySelector(".search-btn");
+            const searchResults = document.querySelector(".search-results");
+
+            function performSearch() {
+                const searchTerm = searchInput.value.trim().toLowerCase();
+                searchResults.innerHTML = "";
+
+                if (searchTerm.length < 2) {
+                    searchResults.classList.remove("show");
+                    return;
+                }
+
+                const results = moviesData.filter(movie =>
+                    movie.title.toLowerCase().includes(searchTerm) ||
+                    (movie.genre && movie.genre.some(g => g.toLowerCase().includes(searchTerm)))
+                );
+
+                if (results.length === 0) {
+                    searchResults.innerHTML = `<div class="p-3 text-center">No results found</div>`;
+                } else {
+                    results.slice(0, 5).forEach(movie => {
+                        const resultItem = document.createElement("div");
+                        resultItem.className = "search-result-item";
+                        resultItem.setAttribute("data-id", movie.id);
+                        resultItem.innerHTML = `
+                            <img src="${movie.image}" alt="${movie.title}">
+                            <div class="search-result-info">
+                                <h4>${movie.title}</h4>
+                                <p>${movie.year} • ${movie.rating}</p>
+                            </div>
+                        `;
+                        searchResults.appendChild(resultItem);
+                    });
+                }
+                searchResults.classList.add("show");
+            }
+
+            searchInput.addEventListener("input", performSearch);
+            searchBtn.addEventListener("click", performSearch);
+            searchInput.addEventListener("keypress", (e) => {
+                if (e.key === "Enter") performSearch();
+            });
+
+            document.addEventListener("click", (e) => {
+                if (!e.target.closest(".search-container")) searchResults.classList.remove("show");
+            });
+
+            searchResults.addEventListener("click", (e) => {
+                const resultItem = e.target.closest(".search-result-item");
+                if (resultItem) {
+                    const id = resultItem.getAttribute("data-id");
+                    const movie = moviesData.find(m => m.id == id);
+                    if (movie) {
+                        modalTitle.textContent = movie.title;
+                        modalPoster.src = movie.image;
+                        modalPoster.alt = movie.title;
+                        modalDescription.textContent = movie.description;
+                        modalGenre.textContent = movie.genre.join(", ");
+                        modalYear.textContent = movie.year;
+                        modalRating.textContent = movie.rating;
+                        modalDuration.textContent = movie.duration;
+
+                        if (movie.match) {
+                            modalMatch.textContent = `${movie.match}% Match`;
+                            modalMatch.style.display = "inline-block";
+                        } else {
+                            modalMatch.style.display = "none";
+                        }
+
+                        modalListBtn.innerHTML = movie.category === "mylist" ?
+                            `<i class="fas fa-minus me-2"></i><span data-translate="modal.removeFromList">Remove from My List</span>` :
+                            `<i class="fas fa-plus me-2"></i><span data-translate="modal.addToList">Add to My List</span>`;
+
+                        if (movie.trailer) {
+                            trailerBtn.style.display = "block";
+                            trailerIframe.src = "";
+                        } else {
+                            trailerBtn.style.display = "none";
+                        }
+
+                        trailerContainer.classList.add("d-none");
+                        movieModal.show();
+                        searchInput.value = "";
+                        searchResults.classList.remove("show");
+                    }
+                }
+            });
+
+            // Smooth Scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute("href");
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        document.querySelectorAll(".nav-link").forEach(link => link.classList.remove("active"));
+                        this.classList.add("active");
+                        window.scrollTo({ top: targetElement.offsetTop - 80, behavior: "smooth" });
+                    }
+                });
+            });
+
+            // Back to Top
+            const backToTopButton = document.getElementById("back-to-top");
+            window.addEventListener("scroll", () => {
+                if (window.pageYOffset > 300) backToTopButton.classList.add("show");
+                else backToTopButton.classList.remove("show");
+            });
+            backToTopButton.addEventListener("click", () => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+
+            // Navbar Scroll Effect
+            const navbar = document.querySelector(".navbar");
+            window.addEventListener("scroll", () => {
+                if (window.scrollY > 50) {
+                    navbar.style.padding = "10px 0";
+                    navbar.style.boxShadow = "0 4px 10px rgba(0, 0, 0, 0.1)";
+                } else {
+                    navbar.style.padding = "15px 0";
+                    navbar.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.1)";
+                }
+            });
+
+            // Toast Notification
+            function showToast(message, type = "info") {
+                const toast = document.getElementById("toast");
+                const toastBody = toast.querySelector(".toast-body");
+                toastBody.textContent = message;
+
+                toast.className = "toast";
+                switch (type) {
+                    case "success": toast.classList.add("bg-success", "text-white"); break;
+                    case "error": toast.classList.add("bg-danger", "text-white"); break;
+                    case "warning": toast.classList.add("bg-warning"); break;
+                    default: toast.classList.add("bg-info", "text-white");
+                }
+
+                const bsToast = new bootstrap.Toast(toast);
+                bsToast.show();
+            }
+
+            // Newsletter Form
+            const newsletterForm = document.querySelector(".newsletter-form");
+            if (newsletterForm) {
+                newsletterForm.addEventListener("submit", function (e) {
+                    e.preventDefault();
+                    const email = this.querySelector('input[type="email"]').value;
+                    const consent = this.querySelector("#newsletter-consent").checked;
+
+                    if (!consent) {
+                        showToast("Please agree to receive promotional emails", "warning");
+                        return;
+                    }
+
+                    console.log("Newsletter subscription:", { email, consent });
+                    showToast("Thank you for subscribing!", "success");
+                    this.reset();
+                });
+            }
+
+            // Welcome Toast
+            if (!localStorage.getItem("visited")) {
+                setTimeout(() => {
+                    showToast("Welcome to MuvView!", "success");
+                    localStorage.setItem("visited", "true");
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>
